@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  HMAppCell.h
 //  HMWebImage
 //
 //  Created by GD on 16/8/20.
@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@class HMAppModel;
+@interface HMAppCell : UITableViewCell
 
-@interface ViewController : UITableViewController
-
+@property (nonatomic,strong) HMAppModel *model;
 
 @end
-
