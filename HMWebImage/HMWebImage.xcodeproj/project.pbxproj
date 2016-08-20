@@ -45,6 +45,7 @@
 		600C191A1D6898AE00E60055 /* CZBaseControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 600C190B1D6898AE00E60055 /* CZBaseControl.m */; };
 		600C191B1D6898AE00E60055 /* CZBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 600C190D1D6898AE00E60055 /* CZBaseView.m */; };
 		600C191C1D6898AE00E60055 /* CZBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 600C190F1D6898AE00E60055 /* CZBaseViewController.m */; };
+		600C19201D68A01800E60055 /* HMDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 600C191F1D68A01800E60055 /* HMDownloaderOperation.m */; };
 		600FDB281D68874B0067FA6F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 600FDB271D68874B0067FA6F /* main.m */; };
 		600FDB2B1D68874B0067FA6F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 600FDB2A1D68874B0067FA6F /* AppDelegate.m */; };
 		600FDB2E1D68874B0067FA6F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 600FDB2D1D68874B0067FA6F /* ViewController.m */; };
@@ -132,6 +133,8 @@
 		600C190D1D6898AE00E60055 /* CZBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZBaseView.m; sourceTree = "<group>"; };
 		600C190E1D6898AE00E60055 /* CZBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CZBaseViewController.h; sourceTree = "<group>"; };
 		600C190F1D6898AE00E60055 /* CZBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CZBaseViewController.m; sourceTree = "<group>"; };
+		600C191E1D68A01800E60055 /* HMDownloaderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMDownloaderOperation.h; sourceTree = "<group>"; };
+		600C191F1D68A01800E60055 /* HMDownloaderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMDownloaderOperation.m; sourceTree = "<group>"; };
 		600FDB231D68874B0067FA6F /* HMWebImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HMWebImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		600FDB271D68874B0067FA6F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		600FDB291D68874B0067FA6F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -292,6 +295,15 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		600C191D1D689FA700E60055 /* HMWebImage */ = {
+			isa = PBXGroup;
+			children = (
+				600C191E1D68A01800E60055 /* HMDownloaderOperation.h */,
+				600C191F1D68A01800E60055 /* HMDownloaderOperation.m */,
+			);
+			name = HMWebImage;
+			sourceTree = "<group>";
+		};
 		600FDB1A1D68874B0067FA6F = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +323,7 @@
 		600FDB251D68874B0067FA6F /* HMWebImage */ = {
 			isa = PBXGroup;
 			children = (
+				600C191D1D689FA700E60055 /* HMWebImage */,
 				600C18F21D6898AE00E60055 /* Tools */,
 				600C18A71D68952A00E60055 /* ThirdLib */,
 				600C18A31D68937600E60055 /* VIew */,
@@ -410,6 +423,7 @@
 			files = (
 				600C18B81D68953A00E60055 /* AFSecurityPolicy.m in Sources */,
 				600C18DE1D68954300E60055 /* MKAnnotationView+WebCache.m in Sources */,
+				600C19201D68A01800E60055 /* HMDownloaderOperation.m in Sources */,
 				600C19121D6898AE00E60055 /* NSAttributedString+CZAdditon.m in Sources */,
 				600C19161D6898AE00E60055 /* UILabel+CZAddition.m in Sources */,
 				600C18BA1D68953A00E60055 /* AFURLResponseSerialization.m in Sources */,

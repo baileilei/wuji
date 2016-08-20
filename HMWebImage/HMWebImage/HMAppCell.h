@@ -12,4 +12,6 @@
 
 @property (nonatomic,strong) HMAppModel *model;
 
+@property (weak, nonatomic) IBOutlet UIImageView *iconView;
+
 @end

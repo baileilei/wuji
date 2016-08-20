@@ -12,17 +12,23 @@
 #import "NSObject+CZAddition.h"
 #import "HMAppModel.h"
 
+#import "HMDownloaderOperation.h"
+
 @interface ViewController ()<UITableViewDataSource>
 
 @end
 
 @implementation ViewController{
-    NSArray *_appList;
+    NSArray<HMAppModel *> *_appList;
+    
+    NSOperationQueue *_queue;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    _queue = [[NSOperationQueue alloc] init];
     
     [self loadData];
 }
@@ -36,8 +42,16 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     HMAppCell *cell = [tableView dequeueReusableCellWithIdentifier:@"app" forIndexPath:indexPath];
     
+    HMAppModel *model = _appList[indexPath.row];
+    cell.model = model;
     
-    cell.model = _appList[indexPath.row];
+    HMDownloaderOperation *op = [HMDownloaderOperation downLoadWithImageURL:model.icon finishBlock:^(UIImage *image) {//默认是在主线程刷新的
+        cell.iconView.image = image;
+    }];
+    
+    [_queue addOperation:op];
+    
+    
 
     return cell;
 }
@@ -54,7 +68,7 @@
         [responseObject enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             HMAppModel *appModel = [[HMAppModel alloc] init];
             
-//            [appModel cz_objectWithDict:obj];
+//            [appModel cz_objectWithDict:obj];//为什么不能用分类???
             [appModel setValuesForKeysWithDictionary:obj];
             
             [tempArray addObject:appModel];

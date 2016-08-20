@@ -8,10 +8,11 @@
 
 #import "HMAppCell.h"
 #import "HMAppModel.h"
-#import "UIImageView+WebCache.h"
+//#import "UIImageView+WebCache.h"
+
 
 @interface HMAppCell ()
-@property (weak, nonatomic) IBOutlet UIImageView *iconView;
+
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *downLoadLabel;
@@ -28,7 +29,8 @@
     
     self.downLoadLabel.text = model.download;
     
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.icon]];
+//    [self.iconView sd_setImageWithURL:[NSURL URLWithString:model.icon]];
+    
 
 }
 
