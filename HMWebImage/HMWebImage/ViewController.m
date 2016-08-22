@@ -92,7 +92,10 @@
     HMAppModel *model = _appList[indexPath.row];
     cell.model = model;
     
-    HMDownloaderOperation *op = [HMDownloaderOperation downLoadWithImageURL:model.icon finishBlock:^(UIImage *image) {//默认是在主线程刷新的
+//    HMDownloaderOperation *op = [HMDownloaderOperation downLoadWithImageURL:model.icon finishBlock:^(UIImage *image) {//默认是在主线程刷新的
+//        cell.iconView.image = image;
+//    }];
+    [[HMDownloaderManager sharedManager] downLoadWithImageURL:model.icon finishBlock:^(UIImage *image) {
         cell.iconView.image = image;
     }];
     
