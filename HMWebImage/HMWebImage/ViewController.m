@@ -26,11 +26,7 @@
 @implementation ViewController{
     NSArray<HMAppModel *> *_appList;
     
-    NSOperationQueue *_queue;
-    
     NSString *_lastURLStr;
-    
-    NSMutableDictionary *_opCache;
 }
 
 
@@ -41,16 +37,6 @@
     HMAppModel *app = _appList[random];
     
     
-   
-    
-//    //操作缓存池
-//    if (![app.icon isEqualToString:_lastURLStr] && _lastURLStr != nil) {//不一样,则取消上一次操作
-//        
-//        [[_opCache objectForKey:_lastURLStr] cancel];
-//        
-//        [_opCache removeObjectForKey:_lastURLStr];
-//
-//    }
     
     [[HMDownloaderManager sharedManager]cancelWithLastURLString:_lastURLStr];
     
@@ -60,16 +46,6 @@
     [[HMDownloaderManager sharedManager] downLoadWithImageURL:app.icon finishBlock:^(UIImage *image) {
         self.iconImage.image = image;
     } ];
-//    HMDownloaderOperation *op = [HMDownloaderOperation downLoadWithImageURL:app.icon finishBlock:^(UIImage *image) {
-//        self.iconImage.image = image;
-//        
-//        [_opCache removeObjectForKey:app.icon];
-//    }];
-//    
-//    //添加到操作缓存池
-//    [_opCache setObject:op forKey:app.icon];
-//    
-//    [_queue addOperation:op];
     
 }
 
@@ -78,9 +54,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    _queue = [[NSOperationQueue alloc] init];
-    
-    _opCache = [NSMutableDictionary dictionary];
     
     [self loadData];
     
@@ -122,8 +95,6 @@
     HMDownloaderOperation *op = [HMDownloaderOperation downLoadWithImageURL:model.icon finishBlock:^(UIImage *image) {//默认是在主线程刷新的
         cell.iconView.image = image;
     }];
-    
-    [_queue addOperation:op];
     
     
 
