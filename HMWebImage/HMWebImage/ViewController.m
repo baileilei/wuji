@@ -15,6 +15,7 @@
 #import "HMDownloaderOperation.h"
 #import "Masonry.h"
 //#import "UIImageView+WebCache.h"
+#import "HMDownloaderManager.h"
 
 @interface ViewController ()<UITableViewDataSource>
 
@@ -42,27 +43,33 @@
     
    
     
-    //操作缓存池
-    if (![app.icon isEqualToString:_lastURLStr] && _lastURLStr != nil) {//不一样,则取消上一次操作
-        
-        [[_opCache objectForKey:_lastURLStr] cancel];
-        
-        [_opCache removeObjectForKey:_lastURLStr];
-
-    }
+//    //操作缓存池
+//    if (![app.icon isEqualToString:_lastURLStr] && _lastURLStr != nil) {//不一样,则取消上一次操作
+//        
+//        [[_opCache objectForKey:_lastURLStr] cancel];
+//        
+//        [_opCache removeObjectForKey:_lastURLStr];
+//
+//    }
+    
+    [[HMDownloaderManager sharedManager]cancelWithLastURLString:_lastURLStr];
     
      _lastURLStr = app.icon;
     
-    HMDownloaderOperation *op = [HMDownloaderOperation downLoadWithImageURL:app.icon finishBlock:^(UIImage *image) {
+    
+    [[HMDownloaderManager sharedManager] downLoadWithImageURL:app.icon finishBlock:^(UIImage *image) {
         self.iconImage.image = image;
-        
-        [_opCache removeObjectForKey:app.icon];
-    }];
-    
-    //添加到操作缓存池
-    [_opCache setObject:op forKey:app.icon];
-    
-    [_queue addOperation:op];
+    } ];
+//    HMDownloaderOperation *op = [HMDownloaderOperation downLoadWithImageURL:app.icon finishBlock:^(UIImage *image) {
+//        self.iconImage.image = image;
+//        
+//        [_opCache removeObjectForKey:app.icon];
+//    }];
+//    
+//    //添加到操作缓存池
+//    [_opCache setObject:op forKey:app.icon];
+//    
+//    [_queue addOperation:op];
     
 }
 
