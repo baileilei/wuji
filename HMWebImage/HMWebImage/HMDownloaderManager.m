@@ -8,26 +8,20 @@
 
 #import "HMDownloaderManager.h"
 #import "HMDownloaderOperation.h"
+#import "NSString+path.h"
 
 @implementation HMDownloaderManager{
 
     NSOperationQueue *_queue;
     
     NSMutableDictionary *_OPCache;
+    
+    //内存缓存
+    NSMutableDictionary *_imageMemCache;
 }
 
 
--(void)cancelWithLastURLString:(NSString *)lastURLString{
-    HMDownloaderOperation *lastOP = [_OPCache objectForKey:lastURLString];
 
-
-    if (lastOP ) {
-        [lastOP cancel];
-        
-        [_OPCache removeObjectForKey:lastURLString];
-    }
-
-}
 
 
 +(instancetype)sharedManager{
@@ -51,6 +45,16 @@
 
 
 -(void)downLoadWithImageURL:(NSString *)imageURL finishBlock:(void (^)(UIImage *))finishBlock{
+    //判断有无缓存
+    if ([self checkCacheWithURLString:imageURL]) {
+        if (finishBlock) {
+            finishBlock([_imageMemCache objectForKey:imageURL]);
+        }
+        
+        return;
+    }
+    
+    
     
     if ([_OPCache objectForKey:imageURL]) {
         return;
@@ -62,6 +66,9 @@
             finishBlock(image);
         }
         
+        //实现内存缓存  可以用图片  直接实现内存缓存
+        [_imageMemCache setObject:image forKey:imageURL];
+        
         [_OPCache removeObjectForKey:imageURL];
         
     }];
@@ -69,6 +76,44 @@
     [_OPCache setObject:op forKey:imageURL];
 
     [_queue addOperation:op];
+
+}
+
+-(void)cancelWithLastURLString:(NSString *)lastURLString{
+    HMDownloaderOperation *lastOP = [_OPCache objectForKey:lastURLString];
+    
+    
+    if (lastOP ) {
+        [lastOP cancel];
+        
+        [_OPCache removeObjectForKey:lastURLString];
+    }
+    
+}
+
+
+-(BOOL)checkCacheWithURLString:(NSString *)urlStr{
+
+    //判断内存缓存
+    if ([_imageMemCache objectForKey:urlStr]) {
+        NSLog(@"从内存中加载.....");
+//        [_imageMemCache objectForKey:urlStr];
+        return YES;
+    }
+    
+    //判断沙盒缓存
+    UIImage *cacheImage = [UIImage imageWithContentsOfFile:[urlStr appendCachePath]];
+    
+    if (cacheImage) {
+        NSLog(@"从沙盒中加载....");
+        
+        [_imageMemCache setObject:cacheImage forKey:urlStr];
+        
+        return YES;
+    }
+    
+    
+    return NO;
 
 }
 

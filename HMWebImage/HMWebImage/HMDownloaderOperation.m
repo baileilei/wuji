@@ -7,6 +7,7 @@
 //
 
 #import "HMDownloaderOperation.h"
+#import "NSString+path.h"
 
 @interface HMDownloaderOperation ()
 
@@ -31,14 +32,24 @@
     
     UIImage *image = [UIImage imageWithData:data];
     
+    
+    
+    
+    
     if (self.isCancelled) {//  其实,实质该请求已经发出去了.  也有数据返回. 只是该图片不刷新了.
         NSLog(@"取消 %@",self.imageURL);
         
         return;
     }
     
+    
+    //实现沙盒缓存
+    if (image != nil) {
+        [data writeToFile:[self.imageURL appendCachePath] atomically:YES];
+    }
+    
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-        NSLog(@"完成" , self.imageURL);
+        NSLog(@"完成 %@" , self.imageURL);
         self.finishiBlock(image);
     }];
 //    dispatch_async(dispatch_get_main_queue(), ^{
