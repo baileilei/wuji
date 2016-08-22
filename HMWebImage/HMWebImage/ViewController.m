@@ -37,8 +37,11 @@
     HMAppModel *app = _appList[random];
     
     
+    if (![app.icon isEqualToString:_lastURLStr] && _lastURLStr) {
+        
+        [[HMDownloaderManager sharedManager]cancelWithLastURLString:_lastURLStr];
+    }
     
-    [[HMDownloaderManager sharedManager]cancelWithLastURLString:_lastURLStr];
     
      _lastURLStr = app.icon;
     
