@@ -13,8 +13,12 @@
 #import "HMAppModel.h"
 
 #import "HMDownloaderOperation.h"
+#import "Masonry.h"
+//#import "UIImageView+WebCache.h"
 
 @interface ViewController ()<UITableViewDataSource>
+
+@property (nonatomic,weak) UIImageView *iconImage;
 
 @end
 
@@ -22,7 +26,46 @@
     NSArray<HMAppModel *> *_appList;
     
     NSOperationQueue *_queue;
+    
+    NSString *_lastURLStr;
+    
+    NSMutableDictionary *_opCache;
 }
+
+
+
+-(void)test{
+    
+    NSInteger random = arc4random_uniform((u_int32_t)_appList.count);
+    HMAppModel *app = _appList[random];
+    
+    
+   
+    
+    //操作缓存池
+    if (![app.icon isEqualToString:_lastURLStr] && _lastURLStr != nil) {//不一样,则取消上一次操作
+        
+        [[_opCache objectForKey:_lastURLStr] cancel];
+        
+        [_opCache removeObjectForKey:_lastURLStr];
+
+    }
+    
+     _lastURLStr = app.icon;
+    
+    HMDownloaderOperation *op = [HMDownloaderOperation downLoadWithImageURL:app.icon finishBlock:^(UIImage *image) {
+        self.iconImage.image = image;
+        
+        [_opCache removeObjectForKey:app.icon];
+    }];
+    
+    //添加到操作缓存池
+    [_opCache setObject:op forKey:app.icon];
+    
+    [_queue addOperation:op];
+    
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,7 +73,31 @@
     
     _queue = [[NSOperationQueue alloc] init];
     
+    _opCache = [NSMutableDictionary dictionary];
+    
     [self loadData];
+    
+    
+    UIView *headerV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 400)];
+    headerV.backgroundColor = [UIColor orangeColor];
+    self.tableView.tableHeaderView = headerV;
+    
+    UIImageView *img = [self imageView];
+    img.frame = CGRectMake(100, 100, 100, 100);
+    [headerV addSubview:img];
+    self.iconImage = img;
+    
+    UIButton *add = [UIButton buttonWithType:UIButtonTypeContactAdd];
+    add.center = headerV.center;
+    [headerV addSubview:add];
+    
+    [add addTarget:self action:@selector(test) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(UIImageView *)imageView{
+    UIImageView *imgV = [[UIImageView alloc] init];
+    imgV.backgroundColor = [UIColor redColor];
+    return imgV;
 }
 
 #pragma mark - dataSource

@@ -20,6 +20,9 @@
 
 -(void)main{
 
+    NSLog(@"传入 %@",self.imageURL);
+    
+    [NSThread sleepForTimeInterval:1.0];
     
     NSURL *url = [NSURL URLWithString:self.imageURL];
     
@@ -28,12 +31,20 @@
     
     UIImage *image = [UIImage imageWithData:data];
     
-//    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-//        self.finishiBlock(image);
-//    }];
-    dispatch_async(dispatch_get_main_queue(), ^{
+    if (self.isCancelled) {//  其实,实质该请求已经发出去了.  也有数据返回. 只是该图片不刷新了.
+        NSLog(@"取消 %@",self.imageURL);
+        
+        return;
+    }
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        NSLog(@"完成" , self.imageURL);
         self.finishiBlock(image);
-    });
+    }];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        NSLog(@"完成" , self.imageURL);
+//        self.finishiBlock(image);
+//    });
 
 }
 

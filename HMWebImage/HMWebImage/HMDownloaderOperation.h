@@ -12,4 +12,7 @@
 
 +(instancetype)downLoadWithImageURL:(NSString *)imageURL finishBlock:(void(^)(UIImage *image))finishBlock;
 
+
+
+
 @end
