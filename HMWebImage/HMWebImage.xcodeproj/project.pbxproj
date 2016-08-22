@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		600A12F91D6B4C8C0019CC21 /* NSString+path.m in Sources */ = {isa = PBXBuildFile; fileRef = 600A12F81D6B4C8C0019CC21 /* NSString+path.m */; };
+		600A12FC1D6B53630019CC21 /* UIImageView+HMWibCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 600A12FB1D6B53630019CC21 /* UIImageView+HMWibCache.m */; };
 		600C18A21D6890BB00E60055 /* apps.json in Resources */ = {isa = PBXBuildFile; fileRef = 600C18A11D6890BB00E60055 /* apps.json */; };
 		600C18A61D6893B100E60055 /* HMAppCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 600C18A51D6893B100E60055 /* HMAppCell.m */; };
 		600C18B61D68953A00E60055 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 600C18AA1D68953A00E60055 /* AFHTTPSessionManager.m */; };
@@ -70,6 +71,8 @@
 /* Begin PBXFileReference section */
 		600A12F71D6B4C8C0019CC21 /* NSString+path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+path.h"; sourceTree = "<group>"; };
 		600A12F81D6B4C8C0019CC21 /* NSString+path.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+path.m"; sourceTree = "<group>"; };
+		600A12FA1D6B53630019CC21 /* UIImageView+HMWibCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+HMWibCache.h"; sourceTree = "<group>"; };
+		600A12FB1D6B53630019CC21 /* UIImageView+HMWibCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+HMWibCache.m"; sourceTree = "<group>"; };
 		600C18A11D6890BB00E60055 /* apps.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = apps.json; sourceTree = "<group>"; };
 		600C18A41D6893B100E60055 /* HMAppCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMAppCell.h; sourceTree = "<group>"; };
 		600C18A51D6893B100E60055 /* HMAppCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMAppCell.m; sourceTree = "<group>"; };
@@ -347,6 +350,8 @@
 				600C191F1D68A01800E60055 /* HMDownloaderOperation.m */,
 				601003601D6B230C00EA1662 /* HMDownloaderManager.h */,
 				601003611D6B230C00EA1662 /* HMDownloaderManager.m */,
+				600A12FA1D6B53630019CC21 /* UIImageView+HMWibCache.h */,
+				600A12FB1D6B53630019CC21 /* UIImageView+HMWibCache.m */,
 			);
 			name = HMWebImage;
 			sourceTree = "<group>";
@@ -518,6 +523,7 @@
 				600C18E51D68954300E60055 /* SDWebImageManager.m in Sources */,
 				600C18A61D6893B100E60055 /* HMAppCell.m in Sources */,
 				601003581D6B1C5B00EA1662 /* MASConstraintMaker.m in Sources */,
+				600A12FC1D6B53630019CC21 /* UIImageView+HMWibCache.m in Sources */,
 				600FDB2E1D68874B0067FA6F /* ViewController.m in Sources */,
 				601003571D6B1C5B00EA1662 /* MASConstraint.m in Sources */,
 				601003561D6B1C5B00EA1662 /* MASCompositeConstraint.m in Sources */,

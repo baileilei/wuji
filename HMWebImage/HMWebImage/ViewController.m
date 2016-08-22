@@ -16,6 +16,7 @@
 #import "Masonry.h"
 //#import "UIImageView+WebCache.h"
 #import "HMDownloaderManager.h"
+#import "UIImageView+HMWibCache.h"
 
 @interface ViewController ()<UITableViewDataSource>
 
@@ -98,10 +99,11 @@
 //    HMDownloaderOperation *op = [HMDownloaderOperation downLoadWithImageURL:model.icon finishBlock:^(UIImage *image) {//默认是在主线程刷新的
 //        cell.iconView.image = image;
 //    }];
-    [[HMDownloaderManager sharedManager] downLoadWithImageURL:model.icon finishBlock:^(UIImage *image) {
-        cell.iconView.image = image;
-    }];
+//    [[HMDownloaderManager sharedManager] downLoadWithImageURL:model.icon finishBlock:^(UIImage *image) {
+//        cell.iconView.image = image;
+//    }];
     
+    [cell.iconView HM_setImageWithURLString:model.icon];
     
 
     return cell;
