@@ -14,10 +14,10 @@
 
     NSOperationQueue *_queue;
     
-    NSMutableDictionary *_OPCache;
+    NSCache *_OPCache;
     
     //内存缓存
-    NSMutableDictionary *_imageMemCache;
+    NSCache *_imageMemCache;
 }
 
 
@@ -38,9 +38,9 @@
 -(instancetype)init{
     if (self = [super init]) {
         _queue = [[NSOperationQueue alloc] init];
-        _OPCache = [NSMutableDictionary dictionary];
+        _OPCache = [[NSCache alloc] init];
         
-        _imageMemCache = [NSMutableDictionary dictionary];
+        _imageMemCache = [[NSCache alloc] init];
     }
     return self;
 }

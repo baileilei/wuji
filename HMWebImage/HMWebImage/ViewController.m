@@ -38,21 +38,7 @@
     HMAppModel *app = _appList[random];
     
     
-    if (![app.icon isEqualToString:_lastURLStr] && _lastURLStr) {//不等于上一个 则取消
-    
-        [[HMDownloaderManager sharedManager]cancelWithLastURLString:_lastURLStr];
-    }
-    else {
-        return;
-    }
-    
-    
-     _lastURLStr = app.icon;
-    
-    
-    [[HMDownloaderManager sharedManager] downLoadWithImageURL:app.icon finishBlock:^(UIImage *image) {
-        self.iconImage.image = image;
-    } ];
+    [self.iconImage HM_setImageWithURLString:app.icon];
     
 }
 
