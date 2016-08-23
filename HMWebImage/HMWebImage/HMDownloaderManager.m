@@ -41,10 +41,27 @@
         _OPCache = [[NSCache alloc] init];
         
         _imageMemCache = [[NSCache alloc] init];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearCache) name:UIApplicationDidEnterBackgroundNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearCache) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+    
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearCache) name:UIApplicationWillTerminateNotification object:nil];
     }
     return self;
 }
 
+-(void)clearCache{
+    [_imageMemCache removeAllObjects];
+    
+    [_OPCache removeAllObjects];
+    
+    [_queue cancelAllOperations];
+}
+
+-(void)dealloc{//单例中无用   问题: 添加了三次,移除三次吗?
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 -(void)downLoadWithImageURL:(NSString *)imageURL finishBlock:(void (^)(UIImage *))finishBlock{
     //判断有无缓存

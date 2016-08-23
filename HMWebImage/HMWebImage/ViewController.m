@@ -42,6 +42,11 @@
     
 }
 
+//为什么该方法不调用???
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    NSLog(@"%s",__func__);
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
