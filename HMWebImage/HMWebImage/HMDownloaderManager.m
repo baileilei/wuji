@@ -39,6 +39,8 @@
     if (self = [super init]) {
         _queue = [[NSOperationQueue alloc] init];
         _OPCache = [NSMutableDictionary dictionary];
+        
+        _imageMemCache = [NSMutableDictionary dictionary];
     }
     return self;
 }
@@ -48,6 +50,7 @@
     //判断有无缓存
     if ([self checkCacheWithURLString:imageURL]) {
         if (finishBlock) {
+            NSLog(@"缓存图片%@,    缓存key%@",[_imageMemCache objectForKey:imageURL],imageURL);
             finishBlock([_imageMemCache objectForKey:imageURL]);
         }
         
@@ -106,7 +109,7 @@
     
     if (cacheImage) {
         NSLog(@"从沙盒中加载....");
-        
+        NSLog(@"%@     内存key%@",cacheImage,urlStr);
         [_imageMemCache setObject:cacheImage forKey:urlStr];
         
         return YES;

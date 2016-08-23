@@ -38,9 +38,12 @@
     HMAppModel *app = _appList[random];
     
     
-    if (![app.icon isEqualToString:_lastURLStr] && _lastURLStr) {
-        
+    if (![app.icon isEqualToString:_lastURLStr] && _lastURLStr) {//不等于上一个 则取消
+    
         [[HMDownloaderManager sharedManager]cancelWithLastURLString:_lastURLStr];
+    }
+    else {
+        return;
     }
     
     
